@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lyte2D</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css" crossorigin="anonymous" />
+
+
+    <style>
+      @font-face {
+        font-family: 'm5x7';
+        font-weight:normal;
+        font-style: normal;
+        src: url('m5x7.ttf');
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        /* background-color: white; */
+        background-color: bisque;
+        background-color: lightyellow;
+        background-color: white;
+        background-color: azure;
+        color: darkslategray;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+      }
+      body {
+        min-width: 300px;
+        --bw: 1200px;
+        max-width: var(--bw);
+        --lm1: calc(100%/2);
+        --bw2: calc(var(--bw)/2);
+        --lm2: calc(var(--lm1) - var(--bw2));
+        --lm3: max(0px, var(--lm2));
+        margin-left: var(--lm3);
+      }
+      a {
+        color: brown;
+
+      }
+      button {
+        background: none!important;
+        border: none;
+        padding: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: brown;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      header, footer {
+        text-align: center;
+      }
+      header {
+        /* padding-top: 10px; */
+        padding-bottom: 20px;
+      }
+      footer {
+        font-size: 14px;
+        padding: 20px;
+        /* padding-left: 20px; */
+        /* text-align: center; */
+      }
+      main {
+
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+        /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+        /* box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 20px;
+        padding-top: 0px;
+        /* margin-top: -60px; */
+        background-color: white;
+        background-color: whitesmoke;
+      }
+      #apipre {
+        /* max-height: 900px; */
+        height: 500px;
+        overflow: auto;
+      }
+      #api {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      .logo {
+        /* font-family: "Arial Black", sans-serif; */
+        font-family: "m5x7", sans-serif;
+        font-size: 50px;
+        /* padding-left: 25px; */
+        text-decoration: none;
+        color: darkslategray;
+        text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-toggle {
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        /* color: #333; */
+        cursor: pointer;
+        display: inline-block;
+        /* font-size: 14px; */
+        /* font-weight: 400; */
+        /* line-height: 1.42857143; */
+        padding: 8px 16px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .dropdown-toggle:hover,
+      .dropdown-toggle:focus {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .dropdown-menu {
+
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1;
+        background-color: whitesmoke;
+        padding: 10px;
+        margin: 0px;
+        list-style: none;
+        max-height: 400px;
+        min-width: 250px;;
+        width: 100%;
+        overflow-y: auto;
+      }
+      .links {
+        /* padding-left: 20px; */
+        /* padding-top: 10px; */
+      }
+      .menulink {
+        /* padding-top: 10px; */
+        padding-right: 6px;
+        text-shadow: 0px 4px 3px rgba(0.2,0,0,0.2),
+             0px 8px 13px rgba(0.2,0,0,0.1),
+             0px 18px 23px rgba(0.2,0,0,0.1);
+      }
+      .menulinkext {
+        padding-left: 6px;
+        text-shadow: 0px 4px 3px rgba(0.2,0,0,0.2),
+             0px 8px 13px rgba(0.2,0,0,0.1),
+             0px 18px 23px rgba(0.2,0,0,0.1);
+      }
+      .sections {
+        padding-top: 10px;
+        padding-bottom: 35px;
+      }
+      .resizer { display:flex;margin:0; padding:0; resize:both; overflow:hidden;}
+      .resizer2 { display:flex;margin:0; padding:0; resize:horizontal; overflow:auto;}
+      .resizer > .resized { flex-grow:1; margin:0; padding:0; border:0 }
+      .ugly {   margin:0; padding:0; border:2px dashed black;  width: 880px; height: 400px;  }
+      .source-area {  margin:0; padding:0;   height: 100% }
+      .lyte-iframe { background-color: black; width: 440px}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-lua.min.js"crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <header>
+      <section class="links">
+        <a class="logo" href="index.html#about">
+          <img src="icon.png" height="25px"/>
+          Lyte2D
+        </a>
+      </section>
+      <section class="links">
+        <a class="menulink" href="index.html#about"> About </a>
+        <a class="menulink" href="index.html#examples"> Examples </a>
+        <a class="menulink" href="index.html#games"> Games </a>
+        <a class="menulink" href="index.html#start"> Getting Started </a>
+        <a class="menulink" href="index.html#guide"> User Guide </a>
+        <a class="menulink" href="index.html#api"> API </a>
+      </section>
+    </header>
+    <main>
+      <section id="about" class="sections">
+        <!-- <div class="logo"> lyte2d? </div> -->
+        <p>
+          Lyte2D is a simple, free and opensource lightweight Lua framework for writing games and other applications. It's heavily inspired by Love2D.
+        </p>
+        <p>
+          Lyte2D is currently "alpha" software. Unless you know what you're doing, you probably shouldn't use it in "production."
+        </p>
+      </section>
+
+      <section id="examples" class="sections">
+        <div class="logo"> examples </div>
+        <div class="dropdown">
+          <div>
+            <button class="dropdown-toggle" type="button" id="dropdownMenuButton" onclick="toggleDropdownMenu()">
+              Examples ▼
+            </button>
+            <span>Example: Hello</span>
+            <a href="">Open in new tab/window</a>
+          </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li> <a target="demos" onclick="on_examplelink_click(event, 'empty')" href="about:blank">Empty</a> </li>
+            <li> <a target="demos" onclick="on_examplelink_click(event, 'hello1')"
+                href="lyte2d.html?zip=examples.zip&app=hello1.lua">Hello world</a> </li>
+            <li> <a target="demos" onclick="on_examplelink_click(event, 'hello2')"
+                href="lyte2d.html?zip=examples.zip&app=hello2.lua">Hello world #2</a> </li>
+            <li> <a target="demos" onclick="on_examplelink_click(event, 'shapes1')"
+                href="lyte2d.html?zip=examples.zip&app=shapes1.lua">Shapes #1</a> </li>
+          </ul>
+        </div>
+        <div class="resizer ugly">
+          <div class="resizer2">
+            <div class="resized source-area">
+              <pre><code id="examplecode" class="language-lua"></code></pre>
+            </div>
+          </div>
+          <iframe name="demos" class="resized lyte-iframe"> </iframe>
+        </div>
+      </section>
+
+
+      <section id="games" class="sections">
+        <div class="logo"> sample games </div>
+        <ul>
+          <li>
+            <span><b>Pong Out!</b></span>
+            <ul>
+              <li>
+                <a class="menulink" target="_blank" href="lyte2d.html?zip=pongout.zip">game (web)</a>
+              </li>
+              <li>
+                <a class="menulink" target="_blank" href="https://github.com/morew4rd/lyte2d/">sources @ github</a>⧉
+              </li>
+              <li>
+                <a class="menulink" target="_blank" href="https://m04r.itch.io/pong-out">game homepage @ itch.io (web + exe)</a>⧉
+              </li>
+              <p> "Pong + Breakout / 3"  Simple game. </p>
+            </ul>
+          </li>
+          <li>
+            <span><b>(TBD)</b></span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="start" class="sections">
+        <div class="logo"> getting started </div>
+        Basics of Lyte2D
+        <p>
+          <code class="language-lua">
+            draw_circle(120,30,50)
+          </code>
+        </p>
+        <p>
+          DL:
+          <ul>
+            <li>
+              Downloads (github) <a class="menulinkext" href="https://github.com/morew4rd/lyte2d"> github</a>⧉
+            </li>
+            <li>
+              Downloads (itch) <a class="menulinkext" href="https://morew4rd.itch.io/lyte2d"> itch.io</a>⧉
+            </li>
+          </ul>
+        </p>
+      </section>
+
+      <section name="guide" class="sections">
+        <div class="logo"> user guide </div>
+
+        <p>
+          Known issues:
+        </p>
+      </section>
+
+
+      <section id="api" class="sections">
+        <div class="logo"> API </div>
+        <pre id="apipre" class="resizer">
+          <code id="apicode" class="resized language-lua">
+          </code></pre>
+      </section>
+
+    </main>
+    <footer>
+      (c) morew4rd
+      <a class="menulinkext" target="_blank" href="https://morew4rd.com">web</a>⧉
+      <a class="menulinkext" target="_blank" href="https://twitter.com/morew4rd">twitter</a>⧉
+      <a class="menulinkext" target="_blank" href="https://github.com/morew4rd"> github</a>⧉
+      <!-- <a class="menulinkext" href="">mastadon</a>⧉ -->
+    </footer>
+  </body>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-223929623-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-223929623-1');
+  </script>
+  <script>
+    let examples, api_text;
+
+    function toggleDropdownMenu() {
+      let dropdownMenu = document.querySelector(".dropdown-menu");
+      if (dropdownMenu.style.display === "block") {
+        dropdownMenu.style.display = "none";
+      } else {
+        dropdownMenu.style.display = "block";
+      }
+    }
+
+    function closeDropdownMenu() {
+      let dropdownMenu = document.querySelector(".dropdown-menu");
+      dropdownMenu.style.display = "none";
+    }
+
+    function on_examplelink_click(ev, app) {
+      closeDropdownMenu();
+      let el = document.getElementById("examplecode");
+      el.innerHTML = examples[app].src;
+      Prism.highlightElement(el);
+    }
+
+    function update_api_text() {
+      let el = document.getElementById("apicode");
+      el.innerHTML = api_text;
+      Prism.highlightElement(el);
+    }
+
+  </script>
+  <script id="script-examples">
+    examples = {
+      empty: {
+        app:"",
+        src:``,
+      },
+      hello1: {
+        app:"hello1.lua",
+        src: `
+function frame()
+  draw_text("Hello, world",0, 0)
+end
+`
+      },
+      hello2: {
+        app:"hello2.lua",
+        src: `
+local x = get_windowwidth()
+local y = get_windowheight()
+local s = "Hello, world :)"
+
+function frame()
+  clear(0,0,0,0)
+  set_color(1,1,1,1)
+  local w, h = measure_text(s)
+  draw_text(s, (x-w)/2, (y-h)/2)
+end
+`
+      },
+      shapes1: {
+        app:"shapes1.lua",
+        src: `
+---
+local W, H = 0, 0
+local str = "Shapes! #1"
+
+local function my_print(str, x, y, center)
+    if center then
+        local w, h = measure_text(str)
+        x = x - w / 2
+        y = y - h / 2
+    end
+    draw_text(str, x, y)
+end
+
+function frame()
+    W = get_windowwidth()
+    H = get_windowheight()
+
+    clear(0, 0, 0, 1)
+
+    -- circle
+    set_color(0.4, 0.2, 0, 0.7)
+    draw_circle_filled(W/2,H/2,510)
+
+    -- rectangles
+    set_color(1,0,0,0.5)
+    draw_rect_filled(20, H/2-100, 200, 50)
+
+    set_color(0,1,0,0.25)
+    draw_rect_filled(20, H/2-100, 50, 150)
+
+    -- random circles and lines
+    math.randomseed(1)
+    for i=1,20 do
+        local x = math.random(0, W)
+        local y = math.random(0, H)
+        local s = math.random(10,50)
+        local r = math.random()
+        local g = math.random()
+        local b = math.random()
+        local a = math.random()*0.5 + 0.5
+        set_color(r,g,b,a)
+        draw_circle(x,y,s)
+        draw_line(W/2, H/2, x, y)
+    end
+
+    -- centered text
+    set_color(1, 1, 1, 1)
+    my_print(str, W / 2, H / 2, true)
+
+end
+
+-- buggy in wasm
+-- set_windowsize(800,580)
+set_windowminsize(800,580)
+`
+      },
+    };
+
+  </script>
+  <script id="script-api">
+    api_text = `
+  -- to be defined by user code
+  frame: function(delta_time: number, width: number, height: number,  resized: boolean, fullscreen: boolean)
+
+  -- API
+
+  quit: function()
+  set_fullscreen: function(fullscreen: boolean)
+  get_fullscreen: function(): boolean
+  set_margins: function(left: number, right: number, top: number, bottom: number)
+  set_paddings: function(left: number, right: number, top: number, bottom: number)
+  get_windowwidth: function(): number
+  get_windowheight: function(): number
+  set_windowsize: function(w: number, h: number)
+  set_windowminsize: function(w: number, h: number)
+  set_windowtitle: function(title: string)
+  set_windowicon: function(path: string)
+  set_vsync: function(vsync: boolean)
+  get_vsync: function(): boolean
+
+  is_keydown: function(keyboardkey: KeyboardKey): boolean
+  is_keyrepeat: function(keyboardkey: KeyboardKey): boolean
+  is_keypressed: function(keyboardkey: KeyboardKey): boolean
+  is_keyreleased: function(keyboardkey: KeyboardKey): boolean
+  is_mousedown: function(mousebut: MouseButton ): boolean
+  is_mousepressed: function(mousebut: MouseButton ): boolean
+  is_mousereleased: function(mousebut: MouseButton ): boolean
+  get_mouse: function(): number, number
+  get_gamepadname: function(idx: number): string
+  num_gamepads: function(): number
+  is_gamepaddown: function(idx: number, gamepadkey: GamepadButton ): boolean
+  is_gamepadpressed: function(idx: number, gamepadkey: GamepadButton ): boolean
+  is_gamepadreleased: function(idx: number, gamepadkey: GamepadButton ): boolean
+  get_gamepadaxis: function(idx: number, gamepadaxis: GamepadAxis): number
+
+  load_text: function(path: string): string
+  save_text: function(path: string, data: string)
+  save_text_append: function(path: string, data: string)
+
+  push_matrix: function()
+  pop_matrix: function()
+  identity_matrix: function()
+  translate: function(dx: number, dy: number)
+  rotate: function(r: number)
+  rotate_at: function(r: number, x: number, y: number)
+  scale: function(sx: number, sy: number)
+  scale_at: function(sx: number, sy: number, x: number, y: number)
+  clear: function(r: number,g: number,b: number,a: number)
+  set_color: function(r: number,g: number,b: number,a: number)
+  reset_color: function()
+  set_defaultblendmode: function(defaultblendmode: BlendMode)
+  set_blendmode: function(blendmode: BlendMode)
+  reset_blendmode: function()
+  set_defaultfiltermode: function(defaultfiltermode: FilterMode)
+  set_filtermode: function(filtermode: FilterMode)
+  reset_filtermode: function()
+
+  new_canvas: function(w: number, h: number): Canvas
+  set_canvas: function(canvas: Canvas)
+  reset_canvas: function()
+
+  load_image: function(path: string): Image
+  draw_image: function(img: Image, x: number, y: number)
+  draw_imagerect: function(img: Image, x: number, y: number, im_x: number, im_y: number, im_w: number, im_h:number)
+
+  load_font: function(path: string, size: number): Font
+  set_font: function(font: Font)
+  reset_font: function()
+  draw_text: function(str: string, x: number, y: number): number, number
+  measure_text: function(str: string): number, number
+
+  draw_point: function(x: number, y: number)
+  draw_line: function(x1: number, y1: number, x2: number, y2: number)
+  draw_rect: function(x: number, y: number, w: number, h: number)
+  draw_rect_filled: function(x: number, y: number, w: number, h: number)
+  draw_circle: function(x: number, y: number, r: number)
+  draw_circle_filled: function(x: number, y: number, r: number)
+  draw_points: function(pts: {Point})
+  draw_lines: function(lines: {Line})
+  draw_rects_filled: function(rects: {Rect})
+  draw_triangles_filled: function(triangles: {Triangle})
+  draw_striplines: function(pts: {Point})
+  draw_striptriangles_filled: function(pts: {Point})
+
+  get_mastervolume: function(): number -- 0..1
+  set_mastervolume: function(vol: number): number -- 0..1
+
+  load_music: function(path: string): Music
+  get_musicvolume: function(mus: Music): number -- 0..1
+  set_musicvolume: function(mus: Music, vol: number): number -- 0..1
+  get_musicpitch: function(mus: Music): number
+  set_musicpitch: function(mus: Music, pitch: number): number
+  get_musicpan: function(mus: Music): number
+  set_musicpan: function(vol: number, pan: number): number
+  play_music: function(mus: Music)
+  pause_music: function(mus: Music)
+  resume_music: function(mus: Music)
+  stop_music: function(mus: Music)
+  seek_music: function(mus: Music,secs: number)
+  get_musiclength: function(mus: Music): number
+  get_musiclength_played: function(mus: Music): number
+  is_musicplaying: function(mus: Music): boolean
+
+  load_sounddata: function(path: string): SoundData
+  get_sounddatavolume: function(sounddata: SoundData): number
+  set_sounddatavolume: function(sounddata: SoundData, volume: number): number
+  get_sounddatapitch: function(sounddata: SoundData): number
+  set_sounddatapitch: function(sounddata: SoundData, volume: number): number
+  get_sounddatapan: function(sounddata: SoundData): number
+  set_sounddatapan: function(sounddata: SoundData, volume: number): number
+
+  new_sound: function(sounddata: SoundData): Sound
+  get_soundvolume: function(sound: Sound): number
+  set_soundvolume: function(sound: Sound, volume: number): number
+  get_soundpitch: function(sound: Sound): number
+  set_soundpitch: function(sound: Sound, volume: number): number
+  get_soundpan: function(sound: Sound): number
+  set_soundpan: function(sound: Sound, volume: number): number
+  play_sound: function(sound: Sound)
+  pause_sound: function(sound: Sound)
+  resume_sound: function(sound: Sound)
+  stop_sound: function(sound: Sound)
+  is_soundplaying: function(sound: Sound): boolean
+
+
+
+  record Point
+      x: number
+      y: number
+  end
+
+      record Line
+      x1: number
+      y1: number
+      x2: number
+      y2: number
+  end
+
+  record Rect
+      x: number
+      y: number
+      w: number
+      h: number
+  end
+
+  record Triangle
+      x1: number
+      y1: number
+      x2: number
+      y2: number
+      x3: number
+      y3: number
+  end
+
+  record Image
+      width: number
+      height: number
+  end
+
+  record Canvas
+      image: Image
+      width: number
+      height: number
+  end
+
+  record Font end
+
+  record Music end
+
+  record SoundData end
+
+  record Sound end
+
+  enum FilterMode
+      "nearest"
+      "linear"
+  end
+
+  enum BlendMode
+      "none"
+      "blend"
+      "add"
+      "mod"
+      "mul"
+  end
+
+  class: function(base:any|nil): any
+
+  record mathx
+      round: function(num: number, numDecimalPlaces: number|nil): number
+  end
+
+  record tween
+      new: function(duration: number, subject: any, target: {string|number:any}, easingfunc: nil|EasingFunc|function): Tween
+  end
+
+  record Tween
+      update: function(Tween, dt: number): boolean
+      set: function(Tween, clock: number): boolean
+      reset: function(Tween)
+  end
+
+  enum EasingFunc
+      "linear"
+
+      "inQuad"
+      "outQuad"
+      "inOutQuad"
+      "outInQuad"
+
+      "inCubic"
+      "outCubic"
+      "inOutCubic"
+      "outInCubic"
+
+      "inQuart"
+      "outQuart"
+      "inOutQuart"
+      "outInQuart"
+
+      "inQuint"
+      "outQuint"
+      "inOutQuint"
+      "outInQuint"
+
+      "inSine"
+      "outSine"
+      "inOutSine"
+      "outInSine"
+
+      "inExpo"
+      "outExpo"
+      "inOutExpo"
+      "outInExpo"
+
+      "inCirc"
+      "outCirc"
+      "inOutCirc"
+      "outInCirc"
+
+      "inElastic"
+      "outElastic"
+      "inOutElastic"
+      "outInElastic"
+
+      "inBack"
+      "outBack"
+      "inOutBack"
+      "outInBack"
+
+      "inBounce"
+      "outBounce"
+      "inOutBounce"
+      "outInBounce"
+  end
+
+
+  enum MouseButton
+      "m_1"
+      "m_2"
+      "m_3"
+      "m_4"
+      "m_5"
+      "m_6"
+      "m_7"
+      "m_8"
+      -- "m_wh_up"
+      -- "m_wh_down"
+      -- "m_wh_left"
+      -- "m_wh_right"
+  end
+
+  enum GamepadButton
+      "but_a"
+      "but_b"
+      "but_x"
+      "but_y"
+      "but_leftbumper"
+      "but_rightbumper"
+      "but_back"
+      "but_start"
+      "but_guide"
+      "but_leftthumb"
+      "but_righthumb"
+      "but_dpad_up"
+      "but_dpad_right"
+      "but_dpad_down"
+      "but_dpad_left"
+  end
+
+      enum GamepadAxis
+      "axis_left_x"
+      "axis_left_y"
+      "axis_right_x"
+      "axis_right_y"
+      "axis_trigger_left"
+      "axis_trigger_right"
+  end
+
+
+
+  enum KeyboardKey
+      "space"
+      "'"
+      ","
+      "-"
+      "."
+      "/"
+      "0"
+      "1"
+      "2"
+      "3"
+      "4"
+      "5"
+      "6"
+      "7"
+      "8"
+      "9"
+      ";"
+      "="
+      "a"
+      "b"
+      "c"
+      "d"
+      "e"
+      "f"
+      "g"
+      "h"
+      "i"
+      "j"
+      "k"
+      "l"
+      "m"
+      "n"
+      "o"
+      "p"
+      "q"
+      "r"
+      "s"
+      "t"
+      "u"
+      "v"
+      "w"
+      "x"
+      "y"
+      "z"
+      "["
+      "\\"
+      "]"
+      "\`"
+      "world_1"
+      "world_2"
+      "escape"
+      "enter"
+      "tab"
+      "backspace"
+      "insert"
+      "delete"
+      "right"
+      "left"
+      "down"
+      "up"
+      "page_up"
+      "page_down"
+      "home"
+      "end"
+      "caps_lock"
+      "scroll_lock"
+      "num_lock"
+      "print_screen"
+      "pause"
+      "f1"
+      "f2"
+      "f3"
+      "f4"
+      "f5"
+      "f6"
+      "f7"
+      "f8"
+      "f9"
+      "f10"
+      "f11"
+      "f12"
+      "f13"
+      "f14"
+      "f15"
+      "f16"
+      "f17"
+      "f18"
+      "f19"
+      "f20"
+      "f21"
+      "f22"
+      "f23"
+      "f24"
+      "f25"
+      "kp_0"
+      "kp_1"
+      "kp_2"
+      "kp_3"
+      "kp_4"
+      "kp_5"
+      "kp_6"
+      "kp_7"
+      "kp_8"
+      "kp_9"
+      "kp_decimal"
+      "kp_divide"
+      "kp_multiply"
+      "kp_subtract"
+      "kp_add"
+      "kp_enter"
+      "kp_equal"
+      "left_shift"
+      "left_control"
+      "left_alt"
+      "left_super"
+      "right_shift"
+      "right_control"
+      "right_alt"
+      "right_super"
+      "menu"
+  end
+
+`;
+  </script>
+  <script>
+    update_api_text();
+  </script>
+</html>
+
