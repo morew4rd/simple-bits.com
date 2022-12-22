@@ -196,10 +196,18 @@
       <section id="about" class="sections">
         <!-- <div class="logo"> lyte2d? </div> -->
         <p>
-          Lyte2D is a simple, free and opensource lightweight Lua framework for writing games and other applications. It's heavily inspired by Love2D.
+          Lyte2D is a simple, free and opensource lightweight Lua framework for writing games and other applications. It's inspired by Love2D.
         </p>
+          Hello world in Lyte2D:
+          <pre><code class="language-lua">function frame()
+  draw_text("Hello, world", 0, 0)
+end</code> </pre>
         <p>
+          Lyte2D is small (Windows binary is less than 1MB zipped) and support HTML5 by compiling into WASM.
+        </p>
+        <p style="color: brown">
           Lyte2D is currently "alpha" software. Unless you know what you're doing, you probably shouldn't use it in "production."
+          Website and documentation is lacking! But if you have some programming experience, especially with LOVE2D you should be fine.
         </p>
       </section>
 
@@ -236,13 +244,13 @@
             <span><b>Pong Out!</b></span>
             <ul>
               <li>
-                <a class="menulink" target="_blank" href="lyte2d.html?zip=pongout.zip">game (web)</a>
+                <a class="menulink" target="_blank" href="lyte2d.html?zip=pongout.zip">run game (browser)</a>
               </li>
               <li>
                 <a class="menulink" target="_blank" href="https://github.com/morew4rd/lyte2d/">sources @ github</a>⧉
               </li>
               <li>
-                <a class="menulink" target="_blank" href="https://m04r.itch.io/pong-out">game homepage @ itch.io (web + exe)</a>⧉
+                <a class="menulink" target="_blank" href="https://m04r.itch.io/pong-out">game homepage @ itch.io (browser + executable)</a>⧉
               </li>
               <p> "Pong + Breakout / 3"  Simple game. </p>
             </ul>
@@ -255,30 +263,53 @@
 
       <section id="start" class="sections">
         <div class="logo"> getting started </div>
-        Basics of Lyte2D
+        <b>Basics of Lyte2D</b>
         <p>
-          <code class="language-lua">
-            draw_circle(120,30,50)
-          </code>
+          Lyte2D currently only works on Windows and HTML5. Linux builds should be trivial, and will be supported at a later release.
+          Windows binaries work well on a SteamDeck with latest supported Proton.
         </p>
         <p>
-          DL:
+          <b>Downloads</b>
           <ul>
             <li>
-              Downloads (github) <a class="menulinkext" href="https://github.com/morew4rd/lyte2d"> github</a>⧉
+              Binaries (itch) <a class="menulinkext" target="_blank" href="https://morew4rd.itch.io/lyte2d"> itch.io</a>⧉
             </li>
             <li>
-              Downloads (itch) <a class="menulinkext" href="https://morew4rd.itch.io/lyte2d"> itch.io</a>⧉
+              Source snapshot <a class="menulinkext" target="_blank" href="https://github.com/morew4rd/lyte2d"> github</a>⧉
             </li>
           </ul>
+        </p>
+        <p>
+          Once you download the binary zip, just put lyte2d.exe somewhere in your path (or in a local directory where you'll write your game.)
         </p>
       </section>
 
       <section name="guide" class="sections">
         <div class="logo"> user guide </div>
-
         <p>
-          Known issues:
+          To get started
+          <ul>
+            <li>
+              Create an <code>app.lua</code> file
+            </li>
+            <li>
+              Implement a global function with the name <code>frame</code>.  (See examples)
+            </li>
+            <li>Start it with <code>lyte2d</code></li>
+            <li>To start an app in another directory you can do <code>lyte2d dir=/sources/games/mycoolgame</code>.  Only "/" is supported as the directory seperator</li>
+            <li>To start an app with a different name  you can do <code>lyte2d app=mygame.lua</code>.  Can be mixed with <code>dir</code> argument</li>
+            <li>You can also start a game from a zip file with <code>lyte2d zip=myapp.zip</code> If there's a file named app.zip, it'll automatically be loaded</li>
+            <li>Lyte2D supports LOVE2D style app fusing. You can create a single executable (fused exe + zip).  Documents TBD, but Makefile has an example for the Pong Out game</li>
+          </ul>
+        </p>
+        <p>
+          <b>Known issues (version 0.1 alpha):</b>
+          <ul>
+            <li> Error messages </li>
+            <li> Circle drawing can have minor issues </li>
+            <li> Font rendering can have minor issues </li>
+            <li> Missing features (coming up in later release): shaders, physics, etc.</li>
+          </ul>
         </p>
       </section>
 

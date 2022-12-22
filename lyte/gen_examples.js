@@ -8,9 +8,9 @@ empty: {
   hello1: {
     title: "Hello world #1",
     app:"hello1.lua",
-    src: `
-function frame()
-draw_text("Hello, world",0, 0)
+    src:
+`function frame()
+    draw_text("Hello, world",0, 0)
 end
 `
   },
@@ -18,16 +18,16 @@ end
 hello2: {
     title: "Hello world #2",
     app:"hello2.lua",
-    src: `
-local x = get_windowwidth()
+    src:
+`local x = get_windowwidth()
 local y = get_windowheight()
 local s = "Hello, world :)"
 
 function frame()
-clear(0,0,0,0)
-set_color(1,1,1,1)
-local w, h = measure_text(s)
-draw_text(s, (x-w)/2, (y-h)/2)
+    clear(0,0,0,1)
+    set_color(1,1,1,1)
+    local w, h = measure_text(s)
+    draw_text(s, (x-w)/2, (y-h)/2)
 end
 `
   },
@@ -35,9 +35,8 @@ end
 shapes1: {
     title: "Shapes #1",
     app:"shapes1.lua",
-    src: `
----
-local W, H = 0, 0
+    src:
+`local W, H = 0, 0
 local str = "Shapes! #1"
 
 local function my_print(str, x, y, center)
@@ -87,11 +86,51 @@ my_print(str, W / 2, H / 2, true)
 
 end
 
--- buggy in wasm
--- set_windowsize(800,580)
 set_windowminsize(800,580)
 `
   },
+
+image1: {
+  title: "Image #1",
+  app: "image1.lua",
+  src:
+  `local hero_img = load_image("hero.png")
+
+  function frame()
+      clear(0,0,0,1)
+      push_matrix()
+      scale(4,4)
+      draw_image(hero_img, 10, 10)
+      pop_matrix()
+  end
+`
+},
+
+image2: {
+  title: "Image #2",
+  app: "image2.lua",
+  src:
+  `-- basic animation
+
+  local hero_img = load_image("hero.png")
+
+  local frame_time = 0
+  local frame_idx = 1
+
+  function frame(dt)
+      frame_time = frame_time + dt
+      if (frame_time > 0.5) then
+          frame_time = 0
+          frame_idx = frame_idx % 5 + 1
+      end
+      clear(0,0,0,1)
+      push_matrix()
+      scale(4,4)
+      draw_imagerect(hero_img, 10, 10, (frame_idx-1)*16, 0, 16, 16)
+      pop_matrix()
+  end
+`
+},
 
 ///////////////////////////////////////////////////////////
 };
