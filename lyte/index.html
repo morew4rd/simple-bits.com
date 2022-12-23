@@ -2,10 +2,15 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lyte2D</title>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css" crossorigin="anonymous" />
     <style>
+      * {
+        -webkit-text-size-adjust: none;
+        text-size-adjust: none;
+      }
       @font-face {
         font-family: 'm5x7';
         font-weight:normal;
@@ -37,7 +42,6 @@
       }
       a {
         color: brown;
-
       }
       li {
         padding-bottom: 4px;
@@ -137,7 +141,7 @@
         margin: 0px;
         list-style: none;
         max-height: 400px;
-        min-width: 250px;;
+        min-width: 250px;
         width: 100%;
         overflow-y: auto;
       }
@@ -167,9 +171,10 @@
       .resizer { display:flex;margin:0; padding:0; resize:both; overflow:hidden;}
       .resizer2 { display:flex;margin:0; padding:0; resize:horizontal; overflow:auto;}
       .resizer > .resized { flex-grow:1; margin:0; padding:0; border:0 }
-      .ugly {   margin:0; padding:0; border:2px dashed black;  width: 880px; height: 400px;  }
-      .source-area {  margin:0; padding:0;   height: 100%; min-width:300px; }
-      .lyte-iframe { background-color: black; width: 440px}
+      /* .resizer2 > .resized { flex-grow:1; margin:0; padding:0; border:0 } */
+      .ugly {   margin:0; padding:0; border:2px dashed black; min-width: 300px; width: max(330px,60%);  height: 400px }
+      .source-area {  margin:0; padding:0;   height: 100%;  }
+      .lyte-iframe { background-color: black; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-lua.min.js" crossorigin="anonymous"></script>
@@ -227,12 +232,12 @@ end</code> </pre>
           </ul>
         </div>
         <div class="resizer ugly">
-          <div class="resizer2">
-            <div class="resized source-area">
-              <pre><code id="examplecode" class="language-lua"></code></pre>
-            </div>
-          </div>
           <iframe id="demosiframe" name="demos" class="resized lyte-iframe"> </iframe>
+        </div>
+        <div class="resizer2 ugly">
+          <div class="resized source-area">
+            <pre><code id="examplecode" class="language-lua"></code></pre>
+          </div>
         </div>
       </section>
 
