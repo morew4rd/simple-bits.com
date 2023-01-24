@@ -6,45 +6,46 @@ end
                 Unless you know what you're doing, you probably shouldn't use it in "production."
                 Website and documentation is lacking!
                 But if you have some programming experience, especially with Love2D you should be fine.
-                </p><b>Basics of Lyte2D</b><p>Lyte2D only works on Windows and HTML5. Linux builds should be trivial, and will be supported at a later release.Windows binaries work well on a SteamDeck with latest supported Proton.</p><b>Downloads</b><ul><li>Binaries<a href="https://morew4rd.itch.io/lyte2d" target="_blank" class="menulinkext">https://morew4rd.itch.io/lyte2d⧉</a></li><li>Source snapshot<a href="https://github.com/morew4rd/lyte2d" target="_blank" class="menulinkext">https://github.com/morew4rd/lyte2d⧉</a></li></ul><p>Once you download the binary zip, just put lyte2d.exe somewhere in your path (or in a local directory where you'll write your game.)</p><b>Some games made with Lyte2D</b><ul><li><b>Pong Out</b> is on<a href="https://m04r.itch.io/pong-out" target="_blank" class="menulinkext">https://m04r.itch.io/pong-out⧉</a> where you can play on your browser, download a small Windows binary or just download the sources</li><li><b>Snek Head</b>- TBD</li></ul></section><section class="sections" id="examples"><div class="title">Examples</div><div class="dropdown"><div><button type="button" class="dropdown-toggle" onclick="toggleDropdownMenu()" id="dropdownMenuButton">Examples ▼</button><span id="examplename"></span><a href="" target="_blank" class="menulink" id="examplenewlink"></a></div><ul id="examplesdropdown" class="dropdown-menu"><li><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'empty')" class="menulink"><div style="display: none;"></div>(None)</a></li><li id="hello1.lua"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'hello1.lua')" class="menulink"><div style="display: none;">function frame()
-  draw_text("Hello, world", 0, 0)
-end</div>hello1.lua</a></li><li id="hello2.lua"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'hello2.lua')" class="menulink"><div style="display: none;">local x = get_windowwidth()
-local y = get_windowheight()
+                </p><b>Basics of Lyte2D</b><p>Lyte2D works on Windows, Linux (including SteamDeck) and HTML5.</p><b>Downloads</b><ul><li>Binaries<a href="https://morew4rd.itch.io/lyte2d" target="_blank" class="menulinkext">https://morew4rd.itch.io/lyte2d⧉</a></li><li>Source snapshot<a href="https://github.com/morew4rd/lyte2d" target="_blank" class="menulinkext">https://github.com/morew4rd/lyte2d⧉</a></li></ul><p>Once you download the binary zip, just put lyte2d.exe somewhere in your path (or in a local directory where you'll write your game.)</p><b>Some games made with Lyte2D</b><ul><li><b>Pong Out</b> is on<a href="https://m04r.itch.io/pong-out" target="_blank" class="menulinkext">https://m04r.itch.io/pong-out⧉</a> where you can play on your browser, download a small Windows binary or just download the sources</li><li><b>Snek Head</b>- TBD</li></ul></section><section class="sections" id="examples"><div class="title">Examples</div><div class="dropdown"><div><button type="button" class="dropdown-toggle" onclick="toggleDropdownMenu()" id="dropdownMenuButton">Examples ▼</button><span id="examplename"></span><a href="" target="_blank" class="menulink" id="examplenewlink"></a></div><ul id="examplesdropdown" class="dropdown-menu"><li><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'empty')" class="menulink"><div style="display: none;"></div>(None)</a></li><li id="hello1"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'hello1')" class="menulink"><div style="display: none;">function lyte.frame()
+  lyte.draw_text("Hello, world", 0, 0)
+end
+</div>hello1</a></li><li id="hello2"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'hello2')" class="menulink"><div style="display: none;">local x = lyte.get_windowwidth()
+local y = lyte.get_windowheight()
 local s = "Hello, world :)"
 
-function frame()
-  clear(0,0,0,1)
-  set_color(1,1,1,1)
-  local w, h = measure_text(s)
-  draw_text(s, (x-w)/2, (y-h)/2)
-end</div>hello2.lua</a></li><li id="shapes1.lua"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'shapes1.lua')" class="menulink"><div style="display: none;">local W, H = 0, 0
+function lyte.frame()
+  lyte.clear(0,0,0,1)
+  lyte.set_color(1,1,1,1)
+  local w, h = lyte.measure_text(s)
+  lyte.draw_text(s, (x-w)/2, (y-h)/2)
+end
+</div>hello2</a></li><li id="shapes1"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'shapes1')" class="menulink"><div style="display: none;">local W = 0
+local H = 0
 local str = "Shapes! #1"
 
 local function my_print(str, x, y, center)
     if center then
-        local w, h = measure_text(str)
+        local w, h = lyte.measure_text(str)
         x = x - w / 2
         y = y - h / 2
     end
-    draw_text(str, x, y)
+    lyte.draw_text(str, x, y)
 end
 
-function frame()
-    W = get_windowwidth()
-    H = get_windowheight()
+function lyte.frame(dt, W, H)
 
-    clear(0, 0, 0, 1)
+    lyte.clear(0, 0, 0, 1)
 
     -- circle
-    set_color(0.4, 0.2, 0, 0.7)
-    draw_circle_filled(W/2,H/2,510)
+    lyte.set_color(0.4, 0.2, 0, 0.7)
+    lyte.draw_circle_filled(W/2,H/2,510)
 
     -- rectangles
-    set_color(1,0,0,0.5)
-    draw_rect_filled(20, H/2-100, 200, 50)
+    lyte.set_color(1,0,0,0.5)
+    lyte.draw_rect_filled(20, H/2-100, 200, 50)
 
-    set_color(0,1,0,0.25)
-    draw_rect_filled(20, H/2-100, 50, 150)
+    lyte.set_color(0,1,0,0.25)
+    lyte.draw_rect_filled(20, H/2-100, 50, 150)
 
     -- random circles and lines
     math.randomseed(1)
@@ -56,462 +57,325 @@ function frame()
         local g = math.random()
         local b = math.random()
         local a = math.random()*0.5 + 0.5
-        set_color(r,g,b,a)
-        draw_circle(x,y,s)
-        draw_line(W/2, H/2, x, y)
+        lyte.set_color(r,g,b,a)
+        lyte.draw_circle(x,y,s)
+        lyte.draw_line(W/2, H/2, x, y)
     end
 
     -- centered text
-    set_color(1, 1, 1, 1)
+    lyte.set_color(1, 1, 1, 1)
     my_print(str, W / 2, H / 2, true)
 
 end
 
-set_windowminsize(800,580)</div>shapes1.lua</a></li><li id="image1.lua"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'image1.lua')" class="menulink"><div style="display: none;">local hero_img = load_image("hero.png")
+lyte.set_windowminsize(800, 500)
 
-function frame()
-    clear(0,0,0,1)
-    push_matrix()
-    scale(4,4)
-    draw_image(hero_img, 10, 10)
-    pop_matrix()
-end</div>image1.lua</a></li><li id="image2.lua"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'image2.lua')" class="menulink"><div style="display: none;">-- basic animation
+</div>shapes1</a></li><li id="image1"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'image1')" class="menulink"><div style="display: none;">local hero_img = lyte.load_image("hero.png")
 
-local hero_img = load_image("hero.png")
+function lyte.frame()
+    lyte.clear(0,0,0,1)
+    lyte.push_matrix()
+    lyte.scale(4,4)
+    lyte.draw_image(hero_img, 10, 10)
+    lyte.pop_matrix()
+end
+</div>image1</a></li><li id="image2"><a href="about:blank" target="none" onclick="on_examplelink_click(event, 'image2')" class="menulink"><div style="display: none;">-- basic animation
+
+local hero_img = lyte.Image("hero.png")
 
 local frame_time = 0
 local frame_idx = 1
 
-function frame(dt)
+function lyte.frame(dt)
     frame_time = frame_time + dt
     if (frame_time > 0.5) then
         frame_time = 0
         frame_idx = frame_idx % 5 + 1
     end
-    clear(0,0,0,1)
-    push_matrix()
-    scale(4,4)
-    draw_imagerect(hero_img, 10, 10, (frame_idx-1)*16, 0, 16, 16)
-    pop_matrix()
-end</div>image2.lua</a></li></ul></div><div class="resizer ugly"><iframe name="demos" class="resized lyte-iframe" title="demos" id="demosiframe"></iframe></div><div class="resizer2 ugly"><div class="resized source-area"><pre><code class="language-lua" id="examplecode"></code></pre></div></div></section><section class="sections" id="guide"><div class="title">User guide</div><p></p><b>Get started</b><ul><li> Create an <code>app.lua</code> file </li><li> Implement a global function with the name <code>frame</code>.  (See examples) </li><li>Start it with <code>lyte2d</code></li><li>To start an app in another directory you can do <code>lyte2d dir=/sources/games/mycoolgame</code>.  Only '/' is supported as the directory seperator</li><li>To start an app with a different name  you can do <code>lyte2d app=mygame.lua</code>.  Can be mixed with <code>dir</code> argument</li><li>You can also start a game from a zip file with <code>lyte2d zip=myapp.zip</code> If there's a file named app.zip, it'll automatically be loaded</li><li>Lyte2D supports LOVE2D style app fusing. You can create a single executable (fused exe + zip).  Documents TBD, but Makefile has an example for the Pong Out game</li></ul><b>Known issues with 0.1 alpha</b><ul><li> Error messages </li><li> Circle drawing can have minor issues </li><li> Font rendering can have minor issues </li><li> Missing features (coming up in later release): shaders, physics, etc.</li></ul></section><section class="sections" id="api"><div class="title">API</div><div class="api-scroller"><pre><code class="language-lua" style="background-color:inherit" id="code-api">-- to be defined by user code
-global frame: function(delta_time: number, width: number, height: number,  resized: boolean, fullscreen: boolean)
-
-quit: function()
-set_fullscreen: function(fullscreen: boolean)
-get_fullscreen: function(): boolean
-set_margins: function(left: number, right: number, top: number, bottom: number)
-set_paddings: function(left: number, right: number, top: number, bottom: number)
-get_windowwidth: function(): number
-get_windowheight: function(): number
-set_windowsize: function(w: number, h: number)
-set_windowminsize: function(w: number, h: number)
-set_windowtitle: function(title: string)
-set_windowicon: function(path: string)
-set_vsync: function(vsync: boolean)
-get_vsync: function(): boolean
-
-is_keydown: function(keyboardkey: KeyboardKey): boolean
-is_keyrepeat: function(keyboardkey: KeyboardKey): boolean
-is_keypressed: function(keyboardkey: KeyboardKey): boolean
-is_keyreleased: function(keyboardkey: KeyboardKey): boolean
-is_mousedown: function(mousebut: MouseButton ): boolean
-is_mousepressed: function(mousebut: MouseButton ): boolean
-is_mousereleased: function(mousebut: MouseButton ): boolean
-get_mouse: function(): number, number
-get_gamepadname: function(idx: number): string
-num_gamepads: function(): number
-is_gamepaddown: function(idx: number, gamepadkey: GamepadButton ): boolean
-is_gamepadpressed: function(idx: number, gamepadkey: GamepadButton ): boolean
-is_gamepadreleased: function(idx: number, gamepadkey: GamepadButton ): boolean
-get_gamepadaxis: function(idx: number, gamepadaxis: GamepadAxis): number
-
-load_text: function(path: string): string
-save_text: function(path: string, data: string)
-save_text_append: function(path: string, data: string)
-
-push_matrix: function()
-pop_matrix: function()
-identity_matrix: function()
-translate: function(dx: number, dy: number)
-rotate: function(r: number)
-rotate_at: function(r: number, x: number, y: number)
-scale: function(sx: number, sy: number)
-scale_at: function(sx: number, sy: number, x: number, y: number)
-clear: function(r: number,g: number,b: number,a: number)
-set_color: function(r: number,g: number,b: number,a: number)
-reset_color: function()
-set_defaultblendmode: function(defaultblendmode: BlendMode)
-set_blendmode: function(blendmode: BlendMode)
-reset_blendmode: function()
-set_defaultfiltermode: function(defaultfiltermode: FilterMode)
-set_filtermode: function(filtermode: FilterMode)
-reset_filtermode: function()
-
-new_canvas: function(w: number, h: number): Canvas
-set_canvas: function(canvas: Canvas)
-reset_canvas: function()
-
-load_image: function(path: string): Image
-draw_image: function(img: Image, x: number, y: number)
-draw_imagerect: function(img: Image, x: number, y: number, im_x: number, im_y: number, im_w: number, im_h:number)
-
-load_font: function(path: string, size: number): Font
-set_font: function(font: Font)
-reset_font: function()
-draw_text: function(str: string, x: number, y: number): number, number
-measure_text: function(str: string): number, number
-
-draw_point: function(x: number, y: number)
-draw_line: function(x1: number, y1: number, x2: number, y2: number)
-draw_rect: function(x: number, y: number, w: number, h: number)
-draw_rect_filled: function(x: number, y: number, w: number, h: number)
-draw_circle: function(x: number, y: number, r: number)
-draw_circle_filled: function(x: number, y: number, r: number)
-draw_points: function(pts: {Point})
-draw_lines: function(lines: {Line})
-draw_rects_filled: function(rects: {Rect})
-draw_triangles_filled: function(triangles: {Triangle})
-draw_striplines: function(pts: {Point})
-draw_striptriangles_filled: function(pts: {Point})
-
-get_mastervolume: function(): number -- 0..1
-set_mastervolume: function(vol: number): number -- 0..1
-
-load_music: function(path: string): Music
-get_musicvolume: function(mus: Music): number -- 0..1
-set_musicvolume: function(mus: Music, vol: number): number -- 0..1
-get_musicpitch: function(mus: Music): number
-set_musicpitch: function(mus: Music, pitch: number): number
-get_musicpan: function(mus: Music): number
-set_musicpan: function(vol: number, pan: number): number
-play_music: function(mus: Music)
-pause_music: function(mus: Music)
-resume_music: function(mus: Music)
-stop_music: function(mus: Music)
-seek_music: function(mus: Music,secs: number)
-get_musiclength: function(mus: Music): number
-get_musiclength_played: function(mus: Music): number
-is_musicplaying: function(mus: Music): boolean
-
-load_sounddata: function(path: string): SoundData
-get_sounddatavolume: function(sounddata: SoundData): number
-set_sounddatavolume: function(sounddata: SoundData, volume: number): number
-get_sounddatapitch: function(sounddata: SoundData): number
-set_sounddatapitch: function(sounddata: SoundData, volume: number): number
-get_sounddatapan: function(sounddata: SoundData): number
-set_sounddatapan: function(sounddata: SoundData, volume: number): number
-
-new_sound: function(sounddata: SoundData): Sound
-get_soundvolume: function(sound: Sound): number
-set_soundvolume: function(sound: Sound, volume: number): number
-get_soundpitch: function(sound: Sound): number
-set_soundpitch: function(sound: Sound, volume: number): number
-get_soundpan: function(sound: Sound): number
-set_soundpan: function(sound: Sound, volume: number): number
-play_sound: function(sound: Sound)
-pause_sound: function(sound: Sound)
-resume_sound: function(sound: Sound)
-stop_sound: function(sound: Sound)
-is_soundplaying: function(sound: Sound): boolean
-
-
-
-record Point
-    x: number
-    y: number
+    lyte.clear(0,0,0,1)
+    lyte.push_matrix()
+    lyte.scale(4,4)
+    lyte.draw_imagerect(hero_img, 10, 10, (frame_idx-1)*16, 0, 16, 16)
+    lyte.pop_matrix()
 end
+</div>image2</a></li></ul></div><div class="resizer ugly"><iframe name="demos" class="resized lyte-iframe" title="demos" id="demosiframe"></iframe></div><div class="resizer2 ugly"><div class="resized source-area"><pre><code class="language-lua" id="examplecode"></code></pre></div></div></section><section class="sections" id="guide"><div class="title">User guide</div><p></p><b>Get started</b><ul><li> Create an <code>app.lua</code> file </li><li> Implement a global function with the name <code>frame</code>.  (See examples) </li><li>Start it with <code>lyte2d</code></li><li>You can get to a REPL to inspect/edit your game real time. Start with <code>lyte2d repl=lua</code>.</li><li>To start an app in another directory you can do <code>lyte2d dir=/sources/games/mycoolgame</code>.  Use '/' is supported as the directory seperator. On Windows '\\' is also supported</li><li>To start an app with a different name  you can do <code>lyte2d app=mygame</code>.  Can be mixed with <code>dir</code> argument</li><li>You can also start a game from a zip file with <code>lyte2d zip=myapp.zip</code> If there's a file named app.zip, it'll automatically be loaded</li><li>Lyte2D supports LOVE2D style app fusing. You can create a single executable (fused exe + zip).  Documents TBD, but Makefile has an example for the Pong Out game</li></ul><b>Known issues with alpha</b><ul><li> Error messages </li><li> Circle drawing can have minor issues </li><li> Font rendering can have minor issues </li><li> Missing features (coming up in later release): shaders, physics, etc.</li></ul></section><section class="sections" id="api"><div class="title">API</div><div class="api-scroller"><pre><code class="language-lua" style="background-color:inherit" id="code-api">/*
+**  Lyte2D API
+**
+** (Using typescript syntax because Lua does not have static types)
+*/
+declare namespace lyte {
 
-record Line
-    x1: number
-    y1: number
-    x2: number
-    y2: number
-end
+    // 'lyte.frame' function type. Should be defined by the user
+    function frame(delta_time: number, width: number, height: number, resized: boolean): Nil;
 
-record Rect
-    x: number
-    y: number
-    w: number
-    h: number
-end
+    function quit(): Nil;
 
-record Triangle
-    x1: number
-    y1: number
-    x2: number
-    y2: number
-    x3: number
-    y3: number
-end
+    function get_windowwidth(): number;
+    function get_windowheight(): number;
+    function set_windowsize(w: number, h: number);
+    function set_windowminsize(w: number, h: number);
+    function set_fullscreen(fullscreen: boolean);
+    function get_fullscreen(): boolean;
+    function set_windowtitle(title: string);
+    function set_windowicon(path: string);
+    function set_vsync(vsync: boolean): Nil;
+    function get_vsync(): boolean;
+    function set_margins(left: number, right: number, top: number, bottom: number);
+    function set_paddings(left: number, right: number, top: number, bottom: number);
 
-record Image
-    width: number
-    height: number
-end
+    function push_matrix();
+    function pop_matrix();
+    function identity_matrix();
+    function translate(dx: number, dy: number);
+    function rotate(r: number);
+    function rotate_at(r: number, x: number, y: number);
+    function scale(sx: number, sy: number);
+    function scale_at(sx: number, sy: number, x: number, y: number);
+    function clear(r: number,g: number,b: number,a: number);
+    function set_color(r: number,g: number,b: number,a: number);
+    function reset_color();
+    function set_defaultblendmode(defaultblendmode: BlendMode);
+    function set_blendmode(blendmode: BlendMode);
+    function reset_blendmode();
+    function set_defaultfiltermode(defaultfiltermode: FilterMode);
+    function set_filtermode(filtermode: FilterMode);
+    function reset_filtermode();
+    function set_canvas(canvas: Canvas);
+    function reset_canvas();
 
-record Canvas
-    image: Image
-    width: number
-    height: number
-end
+    function get_mastervolume(): number;
+    function set_mastervolume(vol: number): number;
 
-record Font end
+    function file_read(path: string): string;
+    function file_write(path: string, data: string);
+    function file_append(path: string, data: string);
 
-record Music end
+    function load_font(path: string, size: number): Font;
+    function set_font(font: Font);
+    function reset_font();
+    function draw_text(str: string, x: number, y: number): Tuple2<number, number>;
+    function measure_text(str: string): Tuple2<number, number>;
 
-record SoundData end
+    function draw_image(img: Image, x: number, y: number);
+    function draw_imagerect(img: Image, x: number, y: number, im_x: number, im_y: number, im_w: number, im_h:number);
+    function draw_point(x: number, y: number);
+    function draw_points(pts: Point[]);
+    function draw_line(x1: number, y1: number, x2: number, y2: number);
+    function draw_lines(lines: Line[]);
+    function draw_rect(x: number, y: number, w: number, h: number);
+    function draw_rect_filled(x: number, y: number, w: number, h: number);
+    function draw_circle(x: number, y: number, r: number);
+    function draw_circle_filled(x: number, y: number, r: number);
 
-record Sound end
-
-enum FilterMode
-    "nearest"
-    "linear"
-end
-
-enum BlendMode
-    "none"
-    "blend"
-    "add"
-    "mod"
-    "mul"
-end
-
-class: function(base:any|nil): any
-
-record mathx
-    round: function(num: number, numDecimalPlaces: number|nil): number
-end
-
-record tween
-    new: function(duration: number, subject: any, target: {string|number:any}, easingfunc: nil|EasingFunc|function): Tween
-end
-
-record Tween
-    update: function(Tween, dt: number): boolean
-    set: function(Tween, clock: number): boolean
-    reset: function(Tween)
-end
-
-enum EasingFunc
-    "linear"
-
-    "inQuad"
-    "outQuad"
-    "inOutQuad"
-    "outInQuad"
-
-    "inCubic"
-    "outCubic"
-    "inOutCubic"
-    "outInCubic"
-
-    "inQuart"
-    "outQuart"
-    "inOutQuart"
-    "outInQuart"
-
-    "inQuint"
-    "outQuint"
-    "inOutQuint"
-    "outInQuint"
-
-    "inSine"
-    "outSine"
-    "inOutSine"
-    "outInSine"
-
-    "inExpo"
-    "outExpo"
-    "inOutExpo"
-    "outInExpo"
-
-    "inCirc"
-    "outCirc"
-    "inOutCirc"
-    "outInCirc"
-
-    "inElastic"
-    "outElastic"
-    "inOutElastic"
-    "outInElastic"
-
-    "inBack"
-    "outBack"
-    "inOutBack"
-    "outInBack"
-
-    "inBounce"
-    "outBounce"
-    "inOutBounce"
-    "outInBounce"
-end
+    function draw_rects_filled(rects: Rect[]);
+    function draw_triangles_filled(triangles: Triangle[]);
+    function draw_striplines(pts: Point[]);
+    function draw_striptriangles_filled(pts: Point[]);
 
 
-enum MouseButton
-    "m_1"
-    "m_2"
-    "m_3"
-    "m_4"
-    "m_5"
-    "m_6"
-    "m_7"
-    "m_8"
-    -- "m_wh_up"
-    -- "m_wh_down"
-    -- "m_wh_left"
-    -- "m_wh_right"
-end
+    function is_keydown(keyboardkey: KeyboardKey): boolean;
+    function is_keyrepeat(keyboardkey: KeyboardKey): boolean;
+    function is_keypressed(keyboardkey: KeyboardKey): boolean;
+    function is_keyreleased(keyboardkey: KeyboardKey): boolean;
+    function is_mousedown(mousebut: MouseButton ): boolean;
+    function is_mousepressed(mousebut: MouseButton ): boolean;
+    function is_mousereleased(mousebut: MouseButton ): boolean;
+    function get_mouse(): Tuple2<number, number>;
+    function get_gamepadname(idx: number): string;
+    function num_gamepads(): number;
+    function is_gamepaddown(idx: number, gamepadkey: GamepadButton ): boolean;
+    function is_gamepadpressed(idx: number, gamepadkey: GamepadButton ): boolean;
+    function is_gamepadreleased(idx: number, gamepadkey: GamepadButton ): boolean;
+    function get_gamepadaxis(idx: number, gamepadaxis: GamepadAxis): number;
 
-enum GamepadButton
-    "but_a"
-    "but_b"
-    "but_x"
-    "but_y"
-    "but_leftbumper"
-    "but_rightbumper"
-    "but_back"
-    "but_start"
-    "but_guide"
-    "but_leftthumb"
-    "but_righthumb"
-    "but_dpad_up"
-    "but_dpad_right"
-    "but_dpad_down"
-    "but_dpad_left"
-end
+    function get_musicvolume(mus: Music): number;
+    function set_musicvolume(mus: Music, vol: number): number;
+    function get_musicpitch(mus: Music): number;
+    function set_musicpitch(mus: Music, pitch: number): number;
+    function get_musicpan(mus: Music): number;
+    function set_musicpan(vol: number, pan: number): number;
+    function play_music(mus: Music);
+    function pause_music(mus: Music);
+    function resume_music(mus: Music);
+    function stop_music(mus: Music);
+    function seek_music(mus: Music,secs: number);
+    function get_musiclength(mus: Music): number;
+    function get_musiclength_played(mus: Music): number;
+    function is_musicplaying(mus: Music): boolean;
 
-enum GamepadAxis
-    "axis_left_x"
-    "axis_left_y"
-    "axis_right_x"
-    "axis_right_y"
-    "axis_trigger_left"
-    "axis_trigger_right"
-end
+    function get_sounddatavolume(sounddata: SoundData): number;
+    function set_sounddatavolume(sounddata: SoundData, volume: number): number;
+    function get_sounddatapitch(sounddata: SoundData): number;
+    function set_sounddatapitch(sounddata: SoundData, volume: number): number;
+    function get_sounddatapan(sounddata: SoundData): number;
+    function set_sounddatapan(sounddata: SoundData, volume: number): number;
 
+    function get_soundvolume(sound: Sound): number;
+    function set_soundvolume(sound: Sound, volume: number): number;
+    function get_soundpitch(sound: Sound): number;
+    function set_soundpitch(sound: Sound, volume: number): number;
+    function get_soundpan(sound: Sound): number;
+    function set_soundpan(sound: Sound, volume: number): number;
+    function play_sound(sound: Sound);
+    function pause_sound(sound: Sound);
+    function resume_sound(sound: Sound);
+    function stop_sound(sound: Sound);
+    function is_soundplaying(sound: Sound): boolean;
 
-enum KeyboardKey
-    "space"
-    "'"
-    ","
-    "-"
-    "."
-    "/"
-    "0"
-    "1"
-    "2"
-    "3"
-    "4"
-    "5"
-    "6"
-    "7"
-    "8"
-    "9"
-    ";"
-    "="
-    "a"
-    "b"
-    "c"
-    "d"
-    "e"
-    "f"
-    "g"
-    "h"
-    "i"
-    "j"
-    "k"
-    "l"
-    "m"
-    "n"
-    "o"
-    "p"
-    "q"
-    "r"
-    "s"
-    "t"
-    "u"
-    "v"
-    "w"
-    "x"
-    "y"
-    "z"
-    "["
-    "\\"
-    "]"
-    "`"
-    "world_1"
-    "world_2"
-    "escape"
-    "enter"
-    "tab"
-    "backspace"
-    "insert"
-    "delete"
-    "right"
-    "left"
-    "down"
-    "up"
-    "page_up"
-    "page_down"
-    "home"
-    "end"
-    "caps_lock"
-    "scroll_lock"
-    "num_lock"
-    "print_screen"
-    "pause"
-    "f1"
-    "f2"
-    "f3"
-    "f4"
-    "f5"
-    "f6"
-    "f7"
-    "f8"
-    "f9"
-    "f10"
-    "f11"
-    "f12"
-    "f13"
-    "f14"
-    "f15"
-    "f16"
-    "f17"
-    "f18"
-    "f19"
-    "f20"
-    "f21"
-    "f22"
-    "f23"
-    "f24"
-    "f25"
-    "kp_0"
-    "kp_1"
-    "kp_2"
-    "kp_3"
-    "kp_4"
-    "kp_5"
-    "kp_6"
-    "kp_7"
-    "kp_8"
-    "kp_9"
-    "kp_decimal"
-    "kp_divide"
-    "kp_multiply"
-    "kp_subtract"
-    "kp_add"
-    "kp_enter"
-    "kp_equal"
-    "left_shift"
-    "left_control"
-    "left_alt"
-    "left_super"
-    "right_shift"
-    "right_control"
-    "right_alt"
-    "right_super"
-    "menu"
-end
+    // Data Types/Constructors
+
+    function Image(path: string): Image;
+    interface Image {
+        width: number;
+        height: number;
+    }
+
+    function Canvas(w: number, h: number): Canvas
+    interface Canvas {
+        image: Image;
+        width: number;
+        height: number;
+    }
+
+    function Music(path: string): Music;
+    interface Music {
+        // get/set
+        volume: number;
+        pitch: number;
+        pan: number;
+        // get only
+        playing: boolean;
+        length: number;
+        length_played: number;
+        // methods
+        play(self: Music, loop: boolean);
+        pause(self: Music);
+        stop(self: Music);
+        resume(self: Music);
+        seek(self: Music, secs: number);
+    }
+
+    function SoundData(path: string): SoundData;
+    interface SoundData {
+        // get/set
+        volume: number;
+        pitch: number;
+        pan: number;
+    }
+
+    function Sound(sounddata: SoundData): Sound;
+    interface Sound {
+        // get/set
+        volume: number;
+        pitch: number;
+        pan: number;
+        // get only
+        playing: boolean;
+        // methods
+        play(self: Music, loop: boolean);
+        pause(self: Music);
+        stop(self: Music);
+        resume(self: Music);
+    }
+
+    interface Font { }
+    interface Point { x: number; y: number; }
+    interface Line { x1: number; y1: number; x2: number; y2: number; }
+    interface Rect { x: number; y: number; w: number; h: number }
+    interface Triangle { x1: number; y1: number; x2: number; y2: number; }
+
+    // enums (string values for various APIs)
+    // TODO shorten some of these names
+    type FilterMode = "nearest" | "linear";
+
+    type BlendMode = "blend" | "add" | "add" | "mod" | "mul" | "none";
+
+    type GamepadAxis = "axis_left_x" | "axis_left_y" | "axis_right_x" | "axis_right_y" |
+        "axis_trigger_left" |  "axis_trigger_right";
+
+    type MouseButton =  "m_1" | "m_2" | "m_3" | "m_4" | "m_5" | "m_6" | "m_7" | "m_8";
+
+    type GamepadButton = "but_a" | "but_b" | "but_x" | "but_y" | "but_leftbumper" | "but_rightbumper" |
+        "but_back" | "but_start" | "but_guide" | "but_leftthumb" | "but_righthumb" |
+        "but_dpad_up" | "but_dpad_right" | "but_dpad_down" | "but_dpad_left" ;
+
+    type KeyboardKey = "space" | "'" | "," | "-" | "." | "/" | "0" | "1" | "2" | "3" | "4" |
+        "5" | "6" | "7" | "8" | "9" | ";" | "=" |
+        "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" |
+        "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" |
+        "[" | "\\" | "]" | "`" |
+        "world_1" | "world_2" | "escape" |
+        "enter" | "tab" | "backspace" | "insert" | "delete" | "right" | "left" | "down" | "up" |
+        "page_up" | "page_down" | "home" | "end" | "caps_lock" | "scroll_lock" | "num_lock" |
+        "print_screen" | "pause" | "f1" | "f2" | "f3" | "f4" |
+        "f5" | "f6" | "f7" | "f8" | "f9" | "f10" | "f11" | "f12" |
+        "f13" | "f14" | "f15" | "f16" | "f17" | "f18" | "f19" | "f20" | "f21" | "f22" | "f23" |
+        "f24" | "f25" |
+        "kp_0" | "kp_1" | "kp_2" | "kp_3" | "kp_4" | "kp_5" | "kp_6" | "kp_7" | "kp_8" | "kp_9" |
+        "kp_decimal" | "kp_divide" | "kp_multiply" | "kp_subtract" | "kp_add" | "kp_enter" | "kp_equal" |
+        "left_shift" | "left_control" | "left_alt" | "left_super" |
+        "right_shift" | "right_control" | "right_alt" | "right_super" |
+        "menu" ;
+
+    //--------------------------------------------------------------------
+    //--------------------------------------------------------------------
+
+    // Internal / Design / WIP
+
+    // multi return types (TODO: remove these)
+    type Tuple2<T1, T2> = { _1: T1, _2: T2};
+    type Nil = null;
+
+    // function class(base: any);
+
+    // alternative to the OO constructors
+    function load_image(path: string): Image;
+    function new_canvas(w: number, h: number): Canvas;
+    function load_music(path: string): Music;
+    function load_sounddata(path: string): SoundData;
+    function new_sound(sounddata: SoundData): Sound;
+
+    // "In design" API
+    namespace filesystem {
+        function read(path: string): string;
+        function write(path: string, content: string);
+        function append(path: string, content: string);
+    }
+    let window: {
+        vsync: boolean;
+        fullscreen: boolean;
+        size: { width: number; height: number; };
+        minsize: { width: number; height: number; };
+        title: string;
+        icon: string;
+        margin: {left: number, right: number, top: number, bottom: number};
+        padding: {left: number, right: number, top: number, bottom: number};
+    }
+    let audio: {
+        volume: number;
+    };
+    namespace mathx {
+        function round(num: number, numDecimalPlaces: number|Nil): number;
+    }
+    namespace tween {
+        // tween.new
+        function _new(duration: number, subject: any, target: any, easingfunc: Nil|EasingFunc): Tween;
+    }
+    interface Tween {
+        update(Tween, dt: number): boolean;
+        set(self: Tween, clock: number): boolean;
+        reset(self: Tween);
+    }
+    type EasingFunc = "" | "linear" | "inQuad" | "outQuad" | "inOutQuad" | "outInQuad" | "inCubic" |
+        "outCubic" | "inOutCubic" | "outInCubic" | "inQuart" | "outQuart" | "inOutQuart" | "outInQuart" |
+        "inQuint" | "outQuint" | "inOutQuint" | "outInQuint" | "inSine" | "outSine" | "inOutSine" |
+        "outInSine" | "inExpo" | "outExpo" | "inOutExpo" | "outInExpo" | "inCirc" | "outCirc" |
+        "inOutCirc" | "outInCirc" | "inElastic" | "outElastic" | "inOutElastic" | "outInElastic" | "inBack" |
+        "outBack" | "inOutBack" | "outInBack" | "inBounce" | "outBounce" | "inOutBounce" | "outInBounce";
+
+    //--------------------------------------------------------------------
+    //--------------------------------------------------------------------
+}
 </code></pre><script> Prism.highlightElement(document.getElementById("code-api")); </script></div></section><script>            function toggleDropdownMenu() {
                 let dropdownMenu = document.querySelector(".dropdown-menu");
                 if (dropdownMenu.style.display === "block") {
