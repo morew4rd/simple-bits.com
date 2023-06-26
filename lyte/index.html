@@ -2,7 +2,7 @@
 <!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta charset="UTF-8" /><title>[Lyte2D] Home</title><link rel="icon" href="public/icon.png" type="image/png" /><link rel="stylesheet" href="public/prism.min.css" /><link rel="stylesheet" href="public/style.css" /><script src="public/prism.min.js"></script><script src="public/prism-lua.min.js"></script><script src="public/prism-typescript.min.js"></script></head><body><header id="top"><section style="padding-bottom: 10px; flex-direction: column" class="container textcenter"><a href="index.html#top" class="item" style="padding-top:10px; padding-left:10px;"><span class="logo">Lyte2D</span></a><div style="padding-top:10px;" class="item textcenter"><a href="index.html#about" class="menulink">About</a><span>| </span><a href="index.html#examples" class="menulink">Examples</a><span>| </span><a href="index.html#guide" class="menulink">User guide</a><span>| </span><a href="index.html#api" class="menulink">API</a></div><div class="item1"> </div></section><a href="index.html#top" style="position:fixed; top: 25px; right: 20px;"><img height="25px" src="public/icon.png" /></a></header><main><section class="sections" id="about"><div class="title">About</div><p> Lyte2D is a simple, lightweigth, free and opensource Lua framework for writing games. </p><p> Lyte2D is inspired by LOVE2D.</p><p> Hello world in Lyte2D: </p><pre><code class="language-lua" style="background-color:inherit" id="example-1">function lyte.tick()
     lyte.draw_text("Hello, world", 0, 0)
 end
-</code></pre><script> Prism.highlightElement(document.getElementById("example-1")); </script><p>Lyte2D is small (Windows and Linux binaries are each about 1MB zipped) and supports HTML5 by compiling into WASM.</p><p style="color: brown;">                Lyte2D is currently "alpha" software.
+</code></pre><script> Prism.highlightElement(document.getElementById("example-1")); </script><p>Lyte2D is small (Windows and Linux binaries are each less than 2 MB zipped) and supports HTML5 by compiling into WASM.</p><p style="color: brown;">                Lyte2D is currently "alpha" software.
                 Unless you know what you're doing, you probably shouldn't use it in "production."
                 But if you have some programming experience, especially with Lua you should be fine.
                 As such, it's ready to use for experimentation and "jam" style games.
@@ -623,7 +623,17 @@ function lyte.tick(dt, width, height, resized)
 
   lyte.draw_text("lyte2d shader inside canvas. move mouse.", 5, (height - 40))
 end
-</div>s09_shader_canvas</a></li></ul></div><div class="resizer ugly"><iframe name="demos" class="resized lyte-iframe" title="demos" id="demosiframe"></iframe></div><div class="resizer2 ugly"><div class="resized source-area"><pre><code class="language-lua" id="examplecode"></code></pre></div></div></section><section class="sections" id="guide"><div class="title">User guide</div><p></p><b>Get started</b><p>Download the executable and place it somewhere in your path. 'lyte.exe' (or 'lyte' on linux) is assumed to be in your path.</p><ul><li>Create an <code>app.lua</code> file.</li><li>Implement <code>lyte.tick</code> function.  (See examples) </li><li>Make sure you're in the same directory in your shell/cmd window</li><li>Start your game with <code>lyte</code>.</li></ul><b>Want to run some code in another location?</b><ul><li>If you want to use another directory as the base, you can do <code>lyte dir=../my_games/testgame</code>. If you use backslashes (you don't need to), you'll need to use escape with another backslash.</li><li>If you want to use another file as your 'main' file, you can do <code>lyte app=myapp</code>, assuming you have 'myapp.lua' in the current directory. You should NOT specify the extension</li><li><code>dir=...</code> and <code>app=...</code> arguments can be combined to run a file in an arbitrary directory</li></ul><b>Package your game once you're ready.</b><ul><li>Ready to share your game with others? Cool!</li><li>Create an 'app.zip' file. Inside the zip, 'app.lua' should be at the root/topmost location</li><li>Copy 'lyte.exe', and rename it to 'mygame.exe' (swap 'mygame' for your chosen binary name)</li><li>Alternatively, consider using 'lyte_gui.exe' on Windows, for no-console launch</li><li>Running <code>mygame</code> will automatically load app.zip if it's in the same directory.</li><li>Option 1: you can share the exe and the zip file, and your players can play it as it is</li><li>Option 2: Fuse your app (next section.)</li></ul><b>App 'fusing'</b><ul><li>Lyte2D support LOVE2D style app fusing. Basically you merge the exe and the zip files into a single binary that will contain everything needed to run your code.</li><li>On linux you can do <code>cat lyte.exe app.zip > mygame.exe</code>. Then just distribute 'mygame.exe' however you'd like.</li><li>Similar on Windows. (...to be documented, in the meantime see LOVE2D docs.)</li></ul><b>HTML5 -- browser games!</b><ul><li>Lyte2D has WASM builds! Just put your `app.zip` file next to the HTML5 files. (lyte.html, lyte.js, lyte.wasm).</li><li>Rename 'lyte.html' to suit your needs. And put all four files up on a static host (itch.io, github pages, etc.)</li></ul><b>'Advanced' features</b><ul><li>You can get to a REPL to inspect/edit your game real time. Start with <code>lyte repl=lua</code>.</li><li>In REPL mode, you can stop the game anytime, inspect/change global variables, and do whatever before continuing the game.</li><li>On Windows just typing a letter will pause the game. And you can start using lyte as a Lua REPL.</li><li>Similar on Linux, however the key is not captured. So after the first key (any key), you can type the commands.</li><li>Hit enter on an empty line to unpause the game loop.</li></ul><b>Known issues with alpha</b><ul><li>Functions do not have default arguments, so all arguments must be passed to each function. This will be fixed in a later release.</li><li>Line/Circle drawing can have minor issues with very small sizes.</li><li>Font rendering can have minor issues</li><li>Browser version has rendering problems with pixels. Desktop versions look much better</li><li>Browser version has issues, especially delays, with audio rendering. Desktop versions are much better</li><li>Firefox has some issues with some shader features, while Edge/Chrome work fine</li><li>There could be lurking bugs in native code (alpha software.)</li><li>REPL does not provide code-completions yet (although the machinery is there.)</li><li>Missing features (coming up in later releases): physics, networking, native UI etc.</li></ul></section><section class="sections" id="api"><div class="title">API</div><p>Note: some of the experimental APIs are not documented.</p><div class="api-scroller"><pre><code class="language-typescript" style="background-color:inherit" id="code-api">declare namespace lyte {
+</div>s09_shader_canvas</a></li></ul></div><div class="resizer ugly"><iframe name="demos" class="resized lyte-iframe" title="demos" id="demosiframe"></iframe></div><div class="resizer2 ugly"><div class="resized source-area"><pre><code class="language-lua" id="examplecode"></code></pre></div></div></section><section class="sections" id="guide"><div class="title">User guide</div><p></p><b>Get started</b><p>Download the executable and place it somewhere in your path. 'lyte.exe' (or 'lyte' on linux) is assumed to be in your path.</p><ul><li>Create an <code>app.lua</code> file.</li><li>Implement <code>lyte.tick</code> function.  (See examples) </li><li>Make sure you're in the same directory in your shell/cmd window</li><li>Start your game with <code>lyte</code>.</li></ul><b>Want to run some code in another location?</b><ul><li>If you want to use another directory as the base, you can do <code>lyte dir=../my_games/testgame</code> </li><li>If you want to use another file as your 'main' file, you can do <code>lyte app=myapp</code>, assuming you have 'myapp.lua' in the current directory. You should NOT specify the extension</li><li><code>dir=...</code> and <code>app=...</code> arguments can be combined to run a file in an arbitrary directory</li></ul><b>Package your game once you're ready.</b><ul><li>Ready to share your game with others? Cool!</li><li>Create an 'app.zip' file. Inside the zip, 'app.lua' should be at the root/topmost location</li><li>Copy 'lyte.exe', and rename it to 'mygame.exe' (swap 'mygame' for your chosen binary name)</li><li>Alternatively, consider using 'lyte_gui.exe' on Windows, for no-console launch</li><li>Running <code>mygame</code> will automatically load app.zip if it's in the same directory.</li><li>Option 1: you can share the exe and the zip file, and your players can play it as it is</li><li>Option 2: Fuse your app (next section.)</li></ul><b>App 'fusing'</b><ul><li>Lyte2D support LOVE2D style app fusing. Basically you merge the exe and the zip files into a single binary that will contain everything needed to run your code.</li><li>On linux you can do <code>cat lyte.exe app.zip > mygame.exe</code>. Then just distribute 'mygame.exe' however you'd like.</li><li>Similar on Windows. (...to be documented, in the meantime see LOVE2D docs.)</li></ul><b>Configuring your app.</b><ul><li>If you'd like to configure your window size, fullscreen, etc. before the app loads, you can create a 'config.lua' file next to your 'app.lua'. Here's an example config.lua file: </li><pre><code class="language-lua" style="background-color:inherit" id="cfg-1">return {
+    window_width = 800,
+    window_height = 500,
+    window_title = "my game",
+    fulscreen = false,
+    window_vsync = true,
+    default_filtermode = "nearest", -- linear
+    default_blendmode = "blend",
+  }
+</code></pre><script> Prism.highlightElement(document.getElementById("cfg-1")); </script><li>Note: you need to keep this file next to the zip or exe file if you fuse your app</li></ul><b>HTML5 -- browser games!</b><ul><li>Lyte2D has WASM builds! Just put your `app.zip` file next to the HTML5 files. (lyte.html, lyte.js, lyte.wasm).</li><li>Rename 'lyte.html' to suit your needs. And put all four files up on a static host (itch.io, github pages, etc.)</li></ul><b>'Advanced' features</b><ul><li>You can get to a REPL to inspect/edit your game real time. Start with <code>lyte repl=lua</code>.</li><li>In REPL mode, you can stop the game anytime, inspect/change global variables, and do whatever before continuing the game.</li><li>On Windows just typing a letter will pause the game. And you can start using lyte as a Lua REPL.</li><li>Similar on Linux, however the key is not captured. So after the first key (any key), you can type the commands.</li><li>Hit enter on an empty line to unpause the game loop.</li></ul><b>Known issues with alpha</b><ul><li>Functions do not have default arguments, so all arguments must be passed to each function. This will be fixed in a later release.</li><li>Line/Circle drawing can have minor issues with very small sizes.</li><li>Font rendering can have minor issues</li><li>Browser version has rendering problems with pixels. Desktop versions look much better</li><li>Browser version has issues, especially delays, with audio rendering. Desktop versions are much better</li><li>Firefox has some issues with some shader features, while Edge/Chrome work fine</li><li>There could be lurking bugs in native code (alpha software.)</li><li>REPL does not provide code-completions yet (although the machinery is there.)</li><li>Missing features (coming up in later releases): physics, networking, native UI etc.</li></ul></section><section class="sections" id="api"><div class="title">API</div><p>Note: some of the experimental APIs are not documented.</p><div class="api-scroller"><pre><code class="language-typescript" style="background-color:inherit" id="code-api">declare namespace lyte {
+    // functions
     function tick(delta_time: number, window_width: number, window_height: number, window_resized: boolean): void
     function quit(): void
     function cls(r: number, g: number, b: number, a: number): void
@@ -735,78 +745,89 @@ end
     function shaderbuilder_vertex(shaderbuilder: ShaderBuilder, vertex_code: string): void
     function shaderbuilder_fragment(shaderbuilder: ShaderBuilder, fragment_code: string): void
     function shaderbuilder_build(shaderbuilder: ShaderBuilder): Shader
-    interface Image {
-        width: number;
-        height: number;
-        is_canvas: boolean;
+    function set_physics_engine(state: PhysicsState): void
+    // lists
+    type FloatVec4 = number[]
+    // dicts
+    type UniformNamesToTypes = {[key: string]: UniformType}
+    // oneofs
+    type ShaderUniformValue = number | FloatVec4 | Image
+    // records
+    type Image = {
+        width: number
+        height: number
+        is_canvas: boolean
     }
-    interface Font {
+    type Font = {
     }
-    interface Music {
-        playing: boolean;
-        length: number;
-        length_played: number;
-        pan: number;
-        pitch: number;
-        volume: number;
-        play: () => void;
-        pause: () => void;
-        resume: () => void;
-        stop: () => void;
-        seek: (secs: number) => void;
+    type Music = {
+        playing: boolean
+        length: number
+        length_played: number
+        pan: number
+        pitch: number
+        volume: number
+        play: (music: Music) => void
+        pause: (music: Music) => void
+        resume: (music: Music) => void
+        stop: (music: Music) => void
+        seek: (music: Music, secs: number) => void
     }
-    interface Sound {
-        pan: number;
-        pitch: number;
-        volume: number;
-        clone: (orig: Sound) => Sound;
-        pause: () => void;
-        play: () => void;
-        resume: () => void;
-        stop: () => void;
+    type Sound = {
+        pan: number
+        pitch: number
+        volume: number
+        clone: (orig: Sound) => Sound
+        pause: (sound: Sound) => void
+        play: (sound: Sound) => void
+        resume: (sound: Sound) => void
+        stop: (sound: Sound) => void
     }
-    type ShaderUniformValue = number | number[] | Image
-    interface Shader {
-        set: (uniform_name: string, uniform_value: ShaderUniformValue) => void;
-        reset: (uniform_name: string) => void;
+    type Shader = {
+        set: (shader: Shader, uniform_name: string, uniform_value: ShaderUniformValue) => void
+        reset: (shader: Shader, uniform_name: string) => void
     }
-    interface ShaderDef {
-        frag: string;
-        vert: string;
-        uniforms: {[key: string]: UniformType};
+    type ShaderDef = {
+        frag: string
+        vert: string
+        uniforms: UniformNamesToTypes
     }
-    interface ShaderBuilder {
-        uniform: (uniform_name: string, uniform_type: UniformType) => void;
-        vertex: (vertex_code: string) => void;
-        fragment: (fragment_code: string) => void;
-        build: () => Shader;
+    type ShaderBuilder = {
+        uniform: (shaderbuilder: ShaderBuilder, uniform_name: string, uniform_type: UniformType) => void
+        vertex: (shaderbuilder: ShaderBuilder, vertex_code: string) => void
+        fragment: (shaderbuilder: ShaderBuilder, fragment_code: string) => void
+        build: (shaderbuilder: ShaderBuilder) => Shader
     }
+    // enums
     type UniformType =
-        '_invalid'  | 'float'  | 'vec2'  | 'vec3'  | 'vec4'  | 'int'  | 'ivec2'  | 'ivec3'  | 'ivec4'  | 'mat4'  | 'sampler2D'
+        "_invalid" | "float" | "vec2" | "vec3" | "vec4" | "int" | "ivec2" | "ivec3" | "ivec4" | "mat4" |
+        "sampler2D"
     type BlendMode =
-        'none'  | 'blend'  | 'add'  | 'mod'  | 'mul'
+        "none" | "blend" | "add" | "mod" | "mul"
     type FilterMode =
-        '_invalid'  | 'nearest'  | 'linear'
+        "_invalid" | "nearest" | "linear"
     type GamepadAxis =
-        'left_x'  | 'left_y'  | 'right_x'  | 'right_y'  | 'left_trigger'  | 'right_trigger'
+        "left_x" | "left_y" | "right_x" | "right_y" | "left_trigger" | "right_trigger"
     type GamepadButton =
-        'pad_a'  | 'pad_b'  | 'pad_x'  | 'pad_y'  | 'left_bumper'  | 'right_bumper'  | 'back'  | 'start'  | 'guide'  |
-        'left_thumb'  | 'right_thumb'  | 'dpad_up'  | 'dpad_right'  | 'dpad_down'  | 'dpad_left'
+        "pad_a" | "pad_b" | "pad_x" | "pad_y" | "left_bumper" | "right_bumper" | "back" | "start" | "guide" |
+        "left_thumb" | "right_thumb" | "dpad_up" | "dpad_right" | "dpad_down" | "dpad_left"
     type MouseButton =
-        'mb1'  | 'mb2'  | 'mb3'  | 'mb4'  | 'mb5'  | 'mb6'  | 'mb7'  | 'mb8'
+        "mb1" | "mb2" | "mb3" | "mb4" | "mb5" | "mb6" | "mb7" | "mb8"
     type KeyboardKey =
-        'space'  | '\''  | ','  | '-'  | '.'  | '/'  | '0'  | '1'  | '2'  | '3'  | '4'  | '5'  | '6'  | '7'  | '8'  | '9'  |
-        ';'  | '='  | 'a'  | 'b'  | 'c'  | 'd'  | 'e'  | 'f'  | 'g'  | 'h'  | 'i'  | 'j'  | 'k'  | 'l'  | 'm'  | 'n'  | 'o'  |
-        'p'  | 'q'  | 'r'  | 's'  | 't'  | 'u'  | 'v'  | 'w'  | 'x'  | 'y'  | 'z'  | '['  | '\\'  | ']'  | '`'  |
-        'world_1'  | 'world_2'  | 'escape'  | 'enter'  | 'tab'  | 'backspace'  | 'insert'  | 'delete'  | 'right'  | 'left'  |
-        'down'  | 'up'  | 'page_up'  | 'page_down'  | 'home'  | 'end'  | 'caps_lock'  | 'scroll_lock'  | 'num_lock'  |
-        'print_screen'  | 'pause'  | 'f1'  | 'f2'  | 'f3'  | 'f4'  | 'f5'  | 'f6'  | 'f7'  | 'f8'  | 'f9'  | 'f10'  |
-        'f11'  | 'f12'  | 'f13'  | 'f14'  | 'f15'  | 'f16'  | 'f17'  | 'f18'  | 'f19'  | 'f20'  | 'f21'  | 'f22'  |
-        'f23'  | 'f24'  | 'f25'  | 'kp_0'  | 'kp_1'  | 'kp_2'  | 'kp_3'  | 'kp_4'  | 'kp_5'  | 'kp_6'  | 'kp_7'  | 'kp_8'  |
-        'kp_9'  | 'kp_decimal'  | 'kp_divide'  | 'kp_multiply'  | 'kp_subtract'  | 'kp_add'  | 'kp_enter'  | 'kp_equal'  |
-        'left_shift'  | 'left_control'  | 'left_alt'  | 'left_super'  | 'right_shift'  | 'right_control'  | 'right_alt'  |
-        'right_super'  | 'menu'
-}
+        "space" | "'" | "," | "-" | "." | "/" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" |
+        "9" | ";" | "=" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" |
+        "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "[" | "\\" | "]" |
+        "`" | "world_1" | "world_2" | "escape" | "enter" | "tab" | "backspace" | "insert" | "delete" |
+        "right" | "left" | "down" | "up" | "page_up" | "page_down" | "home" | "end" | "caps_lock" | "scroll_lock" |
+        "num_lock" | "print_screen" | "pause" | "f1" | "f2" | "f3" | "f4" | "f5" | "f6" | "f7" | "f8" |
+        "f9" | "f10" | "f11" | "f12" | "f13" | "f14" | "f15" | "f16" | "f17" | "f18" | "f19" | "f20" |
+        "f21" | "f22" | "f23" | "f24" | "f25" | "kp_0" | "kp_1" | "kp_2" | "kp_3" | "kp_4" | "kp_5" |
+        "kp_6" | "kp_7" | "kp_8" | "kp_9" | "kp_decimal" | "kp_divide" | "kp_multiply" | "kp_subtract" |
+        "kp_add" | "kp_enter" | "kp_equal" | "left_shift" | "left_control" | "left_alt" | "left_super" |
+        "right_shift" | "right_control" | "right_alt" | "right_super" | "menu"
+    type PhysicsState =
+        "off" | "on" | "paused"
+    }
 </code></pre><script> Prism.highlightElement(document.getElementById("code-api")); </script></div></section><script>            function toggleDropdownMenu() {
                 let dropdownMenu = document.querySelector(".dropdown-menu");
                 if (dropdownMenu.style.display === "block") {
